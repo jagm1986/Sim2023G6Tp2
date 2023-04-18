@@ -6,70 +6,37 @@ package sim.tp2;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 
-public class TablaNumeros extends AbstractTableModel
+public class TablaNumeros extends DefaultTableModel
 {
-    private String[]  mColumnas ={"Orden","Aleatorio"};
-    private ArrayList<Double> numeros;
+    private String[]  mColumnas ={"Orden", "Aleatorio"};
+    private ArrayList<NumeroRNDTable> numeros;
     
      
     
-    public TablaNumeros(ArrayList<Double> nums) {
-        this.numeros = nums;
-        
-        
+    public TablaNumeros(ArrayList<NumeroRNDTable> nums) {
+       cargarDatos(nums);
     }
     
-    public void ordenar()
+ 
+     private void cargarDatos(ArrayList<NumeroRNDTable> filasTabla)
     {
-        Collections.sort(numeros);
-    }
-    
-    @Override
-    public int getRowCount()
-    {
-        int wRes = 5;
-        if (numeros.size() > 5)
-        {
-            wRes = numeros.size();
-        }
-        return wRes;
-    }
-
-    @Override
-    public int getColumnCount()
-    {
-        return mColumnas.length;
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex)
-    {
-        String res = "";
-        if (rowIndex < numeros.size())
-        {
-           Double aux = (Double)numeros.get(rowIndex);
-            switch (columnIndex)
+           Object[][] matrizTabla = new Object[filasTabla.size()+1][3]; // Crea la tabla de tamaño cantidadIntervalos+1X4
+            int i = 0;
+            for(NumeroRNDTable nroActual : filasTabla) //Recorre los intervalos
             {
-                case 0:
-                    res =""+ (rowIndex +1);
-                    break;
-                case 1:
-                    res =""+ aux;
-                    break;
                 
-                
-            }
+                matrizTabla[i][0]=nroActual.getOrden();// "Lim inferior" - "Lim superior"
+                matrizTabla[i][1]=nroActual.getNumero();// Frecuencia observada del intervalo
+                i++;
+            } 
+            matrizTabla[i][0]="Total Numeros: " + filasTabla.size() ; // En la ultima fila agrega el total
+            String[] NombresDeColumnas =  new String [] 
+            {  "Orden", "Nro Aleatorio"};
             
-        }
-        return res;
-    }
-
-    @Override
-    public String getColumnName(int column)
-    {
-        return mColumnas[column];
+            this.setDataVector(matrizTabla, NombresDeColumnas);
     }
 
     @Override

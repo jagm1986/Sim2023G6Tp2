@@ -13,6 +13,8 @@ public class ManejadorIntervalos {
 
     private ArrayList<Double> numerosGenerados;
 
+    private ArrayList<NumeroRNDTable> numerosGenerados2;
+
     private double valorMinimo;
     private double valorMaximo;
 
@@ -24,10 +26,19 @@ public class ManejadorIntervalos {
         valorMaximo = 0;
         intervalos = new ArrayList<>();
         numerosGenerados = new ArrayList<>();
+        numerosGenerados2 = new ArrayList<>();
     }
 
     public ArrayList<Double> getNumerosGenerados() {
         return numerosGenerados;
+    }
+
+    public ArrayList<NumeroRNDTable> getNumerosGenerados2() {
+        return numerosGenerados2;
+    }
+
+    public void setNumerosGenerados2(ArrayList<NumeroRNDTable> numerosGenerados2) {
+        this.numerosGenerados2 = numerosGenerados2;
     }
 
     public ArrayList<Intervalo> getIntervalos() {
@@ -57,7 +68,12 @@ public class ManejadorIntervalos {
         for (int i = 0; i < N; i++) {
             double rnd = gna.generarAleatorio();
             numerosGenerados.add(rnd);
-
+            
+            NumeroRNDTable nro = new NumeroRNDTable();
+            nro.setNumero(rnd);
+            nro.setOrden(String.valueOf(i+1));
+            numerosGenerados2.add(nro);
+            
             if (i == 0) {
                 valorMinimo = rnd;
                 valorMaximo = rnd;
@@ -86,6 +102,12 @@ public class ManejadorIntervalos {
             double numeroGenerado = gna.generarAleatorio();//gna genera 
             numerosGenerados.add(numeroGenerado); // voy agregando al array de numeros cada elemento generado.
 
+            NumeroRNDTable nro = new NumeroRNDTable();
+            nro.setNumero(numeroGenerado);
+            nro.setOrden(String.valueOf(i+1));
+            numerosGenerados2.add(nro);
+            
+            
             if (i == 0) // esto lo que hace es que permite setear un valor inicial que es el primer random generado a valor minimo y maximo para luego poder
             // hacer la comparacion sin errores
             {
@@ -115,6 +137,12 @@ public class ManejadorIntervalos {
         for (int i = 0; i < N; i++) {
             double numeroGenerado = gna.generarAleatorio();
             numerosGenerados.add(numeroGenerado);
+            
+            NumeroRNDTable nro = new NumeroRNDTable();
+            nro.setNumero(numeroGenerado);
+            nro.setOrden(String.valueOf(i+1));
+            numerosGenerados2.add(nro);
+            
 
             if (i == 0) {
                 valorMinimo = numeroGenerado;
@@ -224,6 +252,7 @@ public class ManejadorIntervalos {
         valorMaximo = 0;
         intervalos = new ArrayList<>();
         numerosGenerados = new ArrayList<>();
+        numerosGenerados2 = new ArrayList<>();
 
     }
     
@@ -232,6 +261,21 @@ public class ManejadorIntervalos {
         
         for (int i = 0; i < numerosGenerados.size(); i++) {
             if (i>=desde-1 && i<hasta) aux.add(numerosGenerados.get(i));
+        }
+        return aux;
+    }
+     
+       
+     public ArrayList<NumeroRNDTable> getNumerosGeneradosDesdeHasta2(int desde,int hasta) {
+        ArrayList<NumeroRNDTable> aux=new ArrayList();
+        
+        for (int i = 0; i < numerosGenerados.size(); i++) {
+            NumeroRNDTable nro = new NumeroRNDTable();
+            if (i>=desde-1 && i<hasta){
+                nro.setNumero(numerosGenerados.get(i));
+                nro.setOrden(String.valueOf(i+1));
+                aux.add(nro);
+            }
         }
         return aux;
     }

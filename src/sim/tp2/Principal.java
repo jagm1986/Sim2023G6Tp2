@@ -519,13 +519,6 @@ public class Principal extends javax.swing.JFrame {
         }
         
         
-        
-        
-        
-        
-        
-        
-
         if( rdUniforme.isSelected() && fallo == false)
         {
             float extremoInferior=0,extremoSuperior=0;
@@ -618,7 +611,7 @@ public class Principal extends javax.swing.JFrame {
         //Carga de grilla
         //agregar el desde hasta
         tabla.setModel(new TablaIntervalos(manejador.getIntervalos()));
-        tablaNumeros.setModel(new TablaNumeros(manejador.getNumerosGenerados()));
+        tablaNumeros.setModel(new TablaNumeros(manejador.getNumerosGenerados2()));
         //habilitamos los elemetos para el filtro
         this.txtDesde.setEnabled(true);
         this.txtHasta.setEnabled(true);
@@ -753,7 +746,7 @@ public class Principal extends javax.swing.JFrame {
         if (!errores.equals("")) {
             JOptionPane.showMessageDialog(new JFrame(), errores, "Parámetros incorrectos", JOptionPane.WARNING_MESSAGE);  
         }else{
-            tablaNumeros.setModel(new TablaNumeros(manejador.getNumerosGeneradosDesdeHasta(desde, hasta)));
+            tablaNumeros.setModel(new TablaNumeros(manejador.getNumerosGeneradosDesdeHasta2(desde, hasta)));
         }
         
     }//GEN-LAST:event_btnFiltroActionPerformed
