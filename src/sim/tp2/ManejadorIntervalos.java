@@ -1,4 +1,4 @@
-package sim.tp3;
+package sim.tp2;
 
 import GeneradorDeAleatorios.GeneradorExponencial;
 import GeneradorDeAleatorios.GeneradorNormal;
